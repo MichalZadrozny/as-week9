@@ -19,14 +19,11 @@ public class HibernateService {
     }
 
     @Timer
-    public boolean addListToDatabase(List<User> users){
-
+    public void addListToDatabase(List<User> users){
         try{
             hibernateRepo.saveAll(users);
-            return true;
         }catch (Exception e){
             e.printStackTrace();
-            return false;
         }
     }
 
