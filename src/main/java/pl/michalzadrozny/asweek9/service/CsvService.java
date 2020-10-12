@@ -33,9 +33,7 @@ public class CsvService {
     public List<User> convertListsIntoUsers(List<List<String>> list){
         List<User> users = new ArrayList<>();
 
-        list.forEach(user -> {
-            users.add(new User(Long.parseLong(user.get(0)),user.get(1),user.get(2),user.get(3),user.get(4),user.get(5)));
-        });
+        list.forEach(user -> users.add(new User(Long.parseLong(user.get(0)),user.get(1),user.get(2),user.get(3),user.get(4),user.get(5))));
 
         return users;
     }

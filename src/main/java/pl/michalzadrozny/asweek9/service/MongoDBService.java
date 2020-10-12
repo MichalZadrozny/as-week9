@@ -13,33 +13,33 @@ import java.util.List;
 @Service
 public class MongoDBService {
 
-    private MongoRepository mongoRepository;
+    private final MongoRepository<UserMongoDB,String> mongoRepository;
 
     @Autowired
-    public MongoDBService(MongoRepository mongoRepository) {
+    public MongoDBService(MongoRepository<UserMongoDB,String> mongoRepository) {
         this.mongoRepository = mongoRepository;
     }
 
     public List<UserMongoDB> convertListsIntoUsersMongoDB(List<User> users){
         List<UserMongoDB> userMongoDBList = new ArrayList<>();
-        users.forEach(user -> {
-            userMongoDBList.add(new UserMongoDB(user));
-        });
+        users.forEach(user -> userMongoDBList.add(new UserMongoDB(user)));
 
         return userMongoDBList;
     }
 
     @Timer
-    public boolean addListToDatabase(List<UserMongoDB> users){
+    public void addListToDatabase(List<UserMongoDB> users){
         try{
-            users.forEach(user -> {
-                mongoRepository.save(user);
-            });
-            return true;
+            mongoRepository.saveAll(users);
         }catch (Exception e){
             e.printStackTrace();
-            return false;
+
         }
+    }
+
+    @Timer
+    public List<UserMongoDB> getAllUsers(){
+        return mongoRepository.findAll();
     }
 
 
