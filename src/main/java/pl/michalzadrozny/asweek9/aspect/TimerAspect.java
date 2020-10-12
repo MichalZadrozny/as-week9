@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimerAspect {
 
-    long startTime;
-    long endTime;
+    private long startTime;
+    private long endTime;
 
     @Before("@annotation(pl.michalzadrozny.asweek9.annotation.Timer)")
     private void timerBeforeMethod() {

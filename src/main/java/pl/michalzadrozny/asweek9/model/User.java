@@ -2,9 +2,16 @@ package pl.michalzadrozny.asweek9.model;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 @Data
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
     private long id;
     private String first_name;
     private String last_name;
