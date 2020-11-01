@@ -9,11 +9,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CsvService {
 
-    public List<List<String>> readCsvFile(String path){
+    public Optional<List<List<String>>> readCsvFile(String path){
         List<List<String>> records = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -22,12 +23,12 @@ public class CsvService {
                 String[] values = line.split(",");
                 records.add(Arrays.asList(values));
             }
-            return records;
+            return Optional.of(records);
 
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 
     public List<User> convertListsIntoUsers(List<List<String>> list){

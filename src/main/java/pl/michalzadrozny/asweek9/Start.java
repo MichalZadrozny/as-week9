@@ -14,6 +14,7 @@ import pl.michalzadrozny.asweek9.service.HibernateService;
 import pl.michalzadrozny.asweek9.service.MongoDBService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -37,20 +38,18 @@ public class Start {
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
 
-        List<List<String>> csvFile = csvService.readCsvFile("src\\main\\resources\\MOCK_DATA.csv");
-        List<User> convertedCsv = csvService.convertListsIntoUsers(csvFile);
+        Optional<List<List<String>>> csvFile = csvService.readCsvFile("src\\main\\resources\\MOCK_DATA.csv");
 
-//        hibernateRepo.save(convertedCsv.get(0));
+        if(csvFile.isPresent()){
+            List<User> convertedCsv = csvService.convertListsIntoUsers(csvFile.get());
 
-//        hibernateService.addListToDatabase(convertedCsv);
+            hibernateRepo.save(convertedCsv.get(0));
+            hibernateService.addListToDatabase(convertedCsv);
+            List<User> users = hibernateService.getAllUsers();
 
-        List<UserMongoDB> userMongoDBList = mongoDBService.convertListsIntoUsersMongoDB(convertedCsv);
-//
-        mongoDBService.addListToDatabase(userMongoDBList);
-
-        List<UserMongoDB> users = mongoDBService.getAllUsers();
-//        List<User> users = hibernateService.getAllUsers();
-        users.forEach(System.out::println);
-
+//            List<UserMongoDB> userMongoDBList = mongoDBService.convertListsIntoUsersMongoDB(convertedCsv);
+//            mongoDBService.addListToDatabase(userMongoDBList);
+//            List<UserMongoDB> users = mongoDBService.getAllUsers();
+        }
     }
 }

@@ -13,21 +13,21 @@ public class User {
 
     @Id
     private long id;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String gender;
-    private String ip_address;
+    private String ipAddress;
 
     public User() {
     }
 
-    public User(long id, String first_name, String last_name, String email, String gender, String ip_address) {
+    public User(long id, String firstName, String lastName, String email, String gender, String ipAddress) {
         this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.gender = gender;
-        this.ip_address = ip_address;
+        this.ipAddress = ipAddress;
     }
 }

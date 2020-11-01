@@ -12,26 +12,26 @@ public class UserMongoDB {
 
     @Id
     private String id;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private String email;
     private String gender;
-    private String ip_address;
+    private String ipAddress;
 
-    public UserMongoDB(String first_name, String last_name, String email, String gender, String ip_address) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public UserMongoDB(String firstName, String lastName, String email, String gender, String ipAddress) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.gender = gender;
-        this.ip_address = ip_address;
+        this.ipAddress = ipAddress;
     }
 
     public UserMongoDB(User user){
         this.id = String.valueOf(user.getId());
-        this.first_name = user.getFirst_name();
-        this.last_name = user.getLast_name();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.gender = user.getGender();
-        this.ip_address = user.getIp_address();
+        this.ipAddress = user.getIpAddress();
     }
 }
